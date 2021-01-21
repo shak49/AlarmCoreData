@@ -12,15 +12,20 @@ class AlarmDetailTableViewController: UITableViewController {
     //MARK: - Properties
     var alarm: Alarm?
     var isAlarmOn: Bool = true
+    var defaultColor: UIColor = .white
 
     //MARK: - Outlets
     @IBOutlet weak var alarmFireDatePicker: UIDatePicker!
     @IBOutlet weak var alarmTitleTextField: UITextField!
     @IBOutlet weak var alarmIsEnabledButton: UIButton!
-
+    @IBOutlet weak var contentView: UIView!
+    
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        if let color = contentView.backgroundColor {
+            defaultColor = color
+        }
         updateView()
     }
 
@@ -36,7 +41,7 @@ class AlarmDetailTableViewController: UITableViewController {
     func designIsEnabledButton() {
         switch isAlarmOn {
         case true:
-            alarmIsEnabledButton.backgroundColor = .white
+            alarmIsEnabledButton.backgroundColor = defaultColor
             alarmIsEnabledButton.setTitle("Enabled", for: .normal)
         case false:
             alarmIsEnabledButton.backgroundColor = .darkGray
@@ -52,7 +57,7 @@ class AlarmDetailTableViewController: UITableViewController {
         if let alarm = alarm{
             AlarmController.sharedInstance.update(alarm: alarm, newTitle: title, newFireDate: alarmFireDatePicker.date, isEnabled: isAlarmOn)
         } else{
-            AlarmController.sharedInstance.createAlarm(withTitle: title, and: alarmFireDatePicker.date)
+            AlarmController.sharedInstance.createAlarm(withTitle: title, on: isAlarmOn, and: alarmFireDatePicker.date)
         }
         self.navigationController?.popViewController(animated: true)
     }

@@ -193,6 +193,7 @@
                         <outlet property="alarmFireDatePicker" destination="ziP-Od-9mN" id="X2P-Dc-fM8"/>
                         <outlet property="alarmIsEnabledButton" destination="nUT-HF-fnN" id="pY2-qz-OE8"/>
                         <outlet property="alarmTitleTextField" destination="tRV-Ym-A2f" id="E6m-7O-ExG"/>
+                        <outlet property="contentView" destination="7h9-Jb-0nT" id="fn0-an-nlb"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZjD-64-6Hp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

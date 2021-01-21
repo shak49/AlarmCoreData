@@ -35,11 +35,13 @@ class AlarmController: AlarmScheduler {
         - title: String value to be passed into the `Alarm` initializer's `title` parameter
         - fireDate: Date value to be passed into the `Alarm` initializer's `fireDate` parameter
      */
-    func createAlarm(withTitle title: String, and fireDate: Date) {
+    func createAlarm(withTitle title: String, on isEnabled: Bool, and fireDate: Date) {
         /// Create the Alarm
-       let alarm = Alarm(title: title, fireDate: fireDate)
+       let alarm = Alarm(title: title, isEnabled: isEnabled, fireDate: fireDate)
         /// Schedule the alert
-        scheduleUserNotification(for: alarm)
+        if isEnabled {
+            scheduleUserNotification(for: alarm)
+        }
         /// Save the alarm
         saveToPersistentStore()
     }
@@ -62,7 +64,9 @@ class AlarmController: AlarmScheduler {
         alarm.fireDate = newFireDate
         alarm.isEnabled = isEnabled
         /// Schedule the notification now that the fireDate has been updated
-        scheduleUserNotification(for: alarm)
+        if isEnabled {
+            scheduleUserNotification(for: alarm)
+        }
         /// Save the changes
         saveToPersistentStore()
     }
