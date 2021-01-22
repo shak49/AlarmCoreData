@@ -28,7 +28,7 @@ Go back through the storyboard and write down what items are missing. Are the vi
 The `.xcuserDataModel` is the true model for this application. It's here that we will define the properties. Create a new Entity named `Alarm` and give it four properties. Add to `Alarm`, in no particular order — fireDate, isEnabled, title, and UUIDString. What data type do you think matches these properties best?
 
         - title: String value for the title attribute
-        - isEnabled: Bool value for the enabled attribute, default value of `true`. All alarms will be inherently on.
+        - isEnabled: Bool value for the enabled attribute.
         - fireDate: Date value for the fireDate attribute. This is when the alarm will trigger
         - uuidString: A randomly generated unique identifier. We use this string to keep track of each Alarm `Object`
 
