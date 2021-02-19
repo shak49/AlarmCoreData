@@ -157,15 +157,15 @@ In this next section, you will write a `protocol` for the `AlarmTableViewCell` t
 # AlarmListTableViewController
 Lets wire up our first `TableViewController`
 
-1. Add a new `cocoa touch class`file called `AlarmListTableViewController` as a subclass of `UITableViewController` 
-2. Add a new `cocoa touch class`file called `AlarmDetailTableViewController` as a subclass of `UITableViewController` 
+1. Add a new `cocoa touch class` file called `AlarmListTableViewController` as a subclass of `UITableViewController` 
+2. Add a new `cocoa touch class` file called `AlarmDetailTableViewController` as a subclass of `UITableViewController` 
 3. Recall that the first  `TableViewController` has no subclass. Subclass it now with the `listVC`
 4. Recall that the second `TableViewController` has no subclass. Subclass it now with the `detailVC`
 5. Remove any unneeded boilerplate code
 6. Implement the `UITableViewDatasource` functions using the `alarms` source of truth
 7. In the `cellForRow(at:)` optionally type cast the cell to be your custom cell.
-	1. Set the cells identifier here and on the `storyboard`
-	2. Using the cells `row` property on the `indexPath` pull the `alarm` from the source of truth
+	1. Set the cell's identifier here and on the `storyboard`
+	2. Using the cell's `row` property on the `indexPath` pull the `alarm` from the source of truth
 	3. Call the `updateViews` function on the cell and pass in the `alarm`
 
 We now need to set the `AlarmListTableViewController` to be the delegate for the protocol we declared on the `AlarmTableViewCell` file. 
@@ -255,9 +255,9 @@ func designIsEnabledButton() {
 ### Implement the alarmIsEnabledButtonTapped
 
 1. Conditionally unwrap the `alarm` receiver
-    1. If the `receiver` has a valid value call your `utoggleIsEnabledFor` function from your `sharedInstance`
+    1. If the `receiver` has a valid value call your `toggleIsEnabledFor` function from your `sharedInstance`
         1. Set the `isAlarmOn` property to the value of the `isEnabled` property of the `alarm`
-    2. If the `reciever` does not have a valid value call set the `isAlarmOn` property to the opposite value
+    2. If the `receiver` does not have a valid value call set the `isAlarmOn` property to the opposite value
     3. Call your `designIsEnabledButton` function outside of the conditional unwrap but within the @IBAction
 
 Build and run the application. Check for bugs. At this point you should have a solid working application. The alarms should be able to be created, updated, and persist across app launches. The final task is to implement User Notifications to alert the user when their alarm triggers. 
@@ -269,7 +269,7 @@ Register for local notifications when the app launches.
 
 1. In the `AppDelegate.swift` file, adopt the  `UNUserNotificationCenterDelegate` protocol.
 2. Then, in the `application(_:didFinishLaunchingWithOptions:)` function, request notification authorization on an instance of `UNUserNotificationCenter`.
-* note: See UserNotifications Documentation for furthur instrution: https://developer.apple.com/documentation/usernotifications/asking_permission_to_use_notifications
+* note: See UserNotifications Documentation for furthur instruction: https://developer.apple.com/documentation/usernotifications/asking_permission_to_use_notifications
 ```swift
 UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { (accepted, error) in
             if !accepted{
@@ -283,7 +283,7 @@ UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge
 
 You will need to schedule local notifications each time you enable an alarm and cancel local notifications each time you disable an alarm. Seeing as you can enable/disable an alarm from both the list and detail view, we normally would need to write a `scheduleUserNotifications(for alarm: Alarm)` function and a `cancelUserNotifications(for alarm: Alarm)` function on both of our view controllers. However, using a custom protocol and a protocol extension, we can write those functions only once and use them in each of our view controllers as if we had written them in each view controller.
 
-You will need to heavily reference Apples documentation on UserNotifications: https://developer.apple.com/documentation/usernotifications
+You will need to heavily reference Apple's documentation on UserNotifications: https://developer.apple.com/documentation/usernotifications
 
 1. Create a new `.swift` file named  `AlarmScheduler` 
 2. Declare a `protocol AlarmScheduler`. This protocol will need two functions: `scheduleUserNotifications(for alarm:)` and `cancelUserNotifications(for alarm: Alarm)`.
