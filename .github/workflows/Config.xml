@@ -1,0 +1,16 @@
+name: Launch Firebase builds ( Product Owner testing )
+on:
+  workflow_dispatch:
+    inputs:
+      message:
+        description: 'Message to the PO to help him test the feature'
+        required: false
+        default: 'No message left by the developer to help you test :('
+      preprod:
+        description: 'Do you want to generate a preprod build? (true/false)'
+        required: false
+        default: 'false'
+      prod:
+        description: 'Do you want to generate a prod build? (true/false)'
+        required: false
+        default: 'false'
